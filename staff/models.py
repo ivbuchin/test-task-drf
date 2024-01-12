@@ -20,7 +20,12 @@ class Permission(models.Model):
 class Employee(AbstractUser):
     patronymic = models.CharField(max_length=100, blank=True, null=True)
     permission = models.ForeignKey(Permission, on_delete=models.CASCADE)
-    is_admin = models.BooleanField(default=False)
 
     def __str__(self):
         return self.username
+
+    def is_admin(self):
+        if self.permission.id == 1:
+            return True
+        else:
+            return False
