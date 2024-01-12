@@ -5,9 +5,9 @@ from .models import Employee, Permission
 
 @receiver(pre_save, sender=Employee)
 def get_default_permission(sender, instance, **kwargs):
-    if instance.is_admin():
-        default_permission, created = Permission.objects.get_or_create(name='Admin')
-        instance.permission = default_permission
+    if instance.is_admin :
+      default_permission, created = Permission.objects.get_or_create(name='Admin')
+      instance.permission = default_permission
 
 
 @receiver(post_save, sender=Employee)
