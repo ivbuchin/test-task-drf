@@ -20,7 +20,8 @@ class AdminEmployeeCreateAPIView(generics.CreateAPIView):
             password = request.data.get('password')
             user = Employee(**serializer.validated_data)
             user.set_password(password)
-            user.is_admin=True
+            admin_permission, created = Permission.objects.get_or_create(name='Admin')
+            user.permission = admin_permission
             user.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
